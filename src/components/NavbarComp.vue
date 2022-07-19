@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import { useAuth } from '@vueuse/firebase'
-import { authComp } from '@/utils/firebase'
 
-const { isAuthenticated } = useAuth(authComp)
 const [value, toggle] = useToggle()
 </script>
 
@@ -16,13 +13,13 @@ const [value, toggle] = useToggle()
     <div class="bg-slate-200 rounded-full p-1" @click="toggle()">
       <span i-majesticons:menu-expand-left class="w-8 h-8 text-red-500" />
     </div>
-    <div v-show="value" class="absolute w-1/4 h-32 bg-slate-200 text-zinc-900 top-16 right-0 z-10">
-      <RouterLink v-if="!isAuthenticated" to="/auth/register" class="w-full flex items-center justify-center h-12">
+    <section v-show="value" class="absolute w-1/4 h-32 bg-slate-200 text-zinc-900 top-16 right-0 z-10">
+      <RouterLink to="/auth/register" class="w-full flex items-center justify-center h-12">
         Register
       </RouterLink>
-      <RouterLink v-if="!isAuthenticated" to="/auth/login" class="w-full flex items-center justify-center h-12">
+      <RouterLink to="/auth/login" class="w-full flex items-center justify-center h-12">
         Login
       </RouterLink>
-    </div>
+    </section>
   </header>
 </template>

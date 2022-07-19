@@ -1,20 +1,6 @@
 <script setup lang=ts>
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { useRouter } from 'vue-router'
-import { authComp } from '@/utils/firebase'
-
 const email = $ref('')
 const password = $ref('')
-const router = useRouter()
-
-const registerUser = () => {
-  createUserWithEmailAndPassword(authComp, email, password)
-    .then(() => {
-      router.push('/auth/login')
-    }).catch((err) => {
-      console.error(err.code, err.message)
-    })
-}
 </script>
 
 <template>
@@ -26,7 +12,7 @@ const registerUser = () => {
     <input v-model="email" type="email" class="w-full p-2 px-6 text-zinc-900 rounded-md" placeholder="Your E-Mail Address...">
     <input v-model="password" type="password" class="w-full p-2 px-6 text-zinc-900 rounded-md" placeholder="Your Password...">
 
-    <button class="bg-red-500 w-1/2 text-xl font-bold p-2 px-4 rounded-md" @click="registerUser()">
+    <button class="bg-red-500 w-1/2 text-xl font-bold p-2 px-4 rounded-md">
       Create Your account
     </button>
   </section>
