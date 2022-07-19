@@ -1,5 +1,5 @@
 <template>
-  <main class="text-center">
-    test
-  </main>
+  <header>
+    <div i-mdi:cloud />
+  </header>
 </template>
