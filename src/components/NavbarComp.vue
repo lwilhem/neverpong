@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import { useRouter } from 'vue-router'
 import { supabase } from '@/utils/supabase'
 
 const [value, toggle] = useToggle()
-const { signOut } = supabase.auth
-const router = useRouter()
 
-const logout = async () => {
-  signOut()
-    .then((data) => {
-      if (data.error)
-        return console.error(data.error)
+const userSignOut = async () => {
+  const { error } = await supabase.auth.signOut()
 
-      router.push('/')
-    })
+  if (error)
+    return console.error({ status: error.status, message: error.message })
 }
 </script>
 
@@ -40,7 +34,7 @@ const logout = async () => {
       <RouterLink to="/tickets/create" class="w-full flex items-center justify-center h-12">
         ticket List
       </RouterLink>
-      <button @click="logout()">
+      <button @click="userSignOut()">
         logout
       </button>
     </section>
