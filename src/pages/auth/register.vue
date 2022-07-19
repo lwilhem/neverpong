@@ -1,12 +1,16 @@
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue'
+
+const AsyncRegisterForm = defineAsyncComponent(() => import('@/components/RegisterForm.vue'))
 </script>
 
 <template>
-  <main class="flex items-center justify-center">
-    <form action="" class="w-1/2 flex items-center justify-center h-[40rem]">
-      <h2 class="font-bold uppercase text-xl">
-        Register Your account
-      </h2>
-    </form>
+  <main class="flex items-center justify-center h-[30rem]">
+    <Suspense>
+      <AsyncRegisterForm />
+      <template #fallback>
+        <div i-mdi:cloud class="w-32 h-32" />
+      </template>
+    </Suspense>
   </main>
 </template>
