@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <header>
-    <div i-mdi:cloud />
-  </header>
+  <main>
+    <h1>Such Quality in tis app wow</h1>
+  </main>
 </template>

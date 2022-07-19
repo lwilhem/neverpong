@@ -1,7 +1,21 @@
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
+import { useRouter } from 'vue-router'
+import { supabase } from '@/utils/supabase'
 
 const [value, toggle] = useToggle()
+const { signOut } = supabase.auth
+const router = useRouter()
+
+const logout = async () => {
+  signOut()
+    .then((data) => {
+      if (data.error)
+        return console.error(data.error)
+
+      router.push('/')
+    })
+}
 </script>
 
 <template>
@@ -13,13 +27,22 @@ const [value, toggle] = useToggle()
     <div class="bg-slate-200 rounded-full p-1" @click="toggle()">
       <span i-majesticons:menu-expand-left class="w-8 h-8 text-red-500" />
     </div>
-    <section v-show="value" class="absolute w-1/4 h-32 bg-slate-200 text-zinc-900 top-16 right-0 z-10">
+    <section v-show="value" class="absolute w-1/4 h-fit bg-slate-200 text-zinc-900 top-16 right-0 z-10">
       <RouterLink to="/auth/register" class="w-full flex items-center justify-center h-12">
         Register
       </RouterLink>
       <RouterLink to="/auth/login" class="w-full flex items-center justify-center h-12">
         Login
       </RouterLink>
+      <RouterLink to="/tickets/create" class="w-full flex items-center justify-center h-12">
+        Create a ticket
+      </RouterLink>
+      <RouterLink to="/tickets/create" class="w-full flex items-center justify-center h-12">
+        ticket List
+      </RouterLink>
+      <button @click="logout()">
+        logout
+      </button>
     </section>
   </header>
 </template>
